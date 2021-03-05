@@ -23,7 +23,9 @@ exports.create = (req, res) => {
     bank: req.body.bank,
     phoneNo: req.body.phoneNo,
     stateOfResidence: req.body.stateOfResidence,
-    counrty: req.body.counrty,
+    county: req.body.county,
+    accountName: req.body.accountName,
+    address: req.body.address,
     nextOfKin: req.body.nextOfKin,
     nextOfKinPhoneNo: req.body.nextOfKinPhoneNo,
     userId: req.body.userId

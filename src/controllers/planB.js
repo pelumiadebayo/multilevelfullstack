@@ -37,21 +37,19 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Profile from the database.
+// Retrieve all Plan from the database.
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   
-    PlanB.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving Profiles."
-        });
+  PlanB.findAll({ where: { isDisapproved: false } })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Profiles."
       });
+    });
 };
 
 // Find a single Profile with an id

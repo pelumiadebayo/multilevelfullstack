@@ -1,3 +1,4 @@
+const { response } = require('express');
 const { Sequelize } = require('sequelize');
 const models = require("../models");
 const PlanA = models.planAs;
@@ -13,15 +14,22 @@ exports.create = (req, res) => {
     });
     return;
   }
-
-  // Create a Profile
-  const planA = {
+  let planA = {
     amountPaid: req.body.amountPaid,
-    uplineId: req.body.uplineId,
     userId: req.body.userId,
     PaymentEvidence: req.body.PaymentEvidence,
     Verified: false,
-    isDisapproved: false
+    isDisapproved: false,
+    Level: 0,
+    downlineCount: 0,
+    uplineId: req.body.uplineId,
+    L2UplineId: req.body.L2UplineId,
+    L3UplineId: req.body.L3UplineId,
+    L4UplineId: req.body.L4UplineId,
+    L5UplineId: req.body.L5UplineId,
+    L6UplineId: req.body.L6UplineId,
+    verifiedBy: req.body.uplineId,
+    verificationDate: null,
   };
 
   // Save Profile in the database
@@ -37,11 +45,10 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Profile from the database.
+// Retrieve all Plan from the database.
 exports.findAll = (req, res) => {
-    const isDelete = req.query.isDelete;
   
-    PlanA.findAll({ where: { isDelete: false } })
+    PlanA.findAll({ where: { isDisapproved: false } })
       .then(data => {
         res.send(data);
       })

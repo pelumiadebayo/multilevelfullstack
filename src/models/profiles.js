@@ -45,7 +45,13 @@ module.exports = (sequelize, Sequelize) => {
     bank: {
       type: Sequelize.STRING
     },
+    accountName: {
+      type: Sequelize.STRING
+    },
     phoneNo: {
+      type: Sequelize.STRING
+    },
+    address: {
       type: Sequelize.STRING
     },
     stateOfResidence: {
@@ -53,7 +59,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     counrty:{
       type: Sequelize.STRING
-
     },
     nextOfKin: {
       type: Sequelize.STRING

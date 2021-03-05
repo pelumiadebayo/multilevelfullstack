@@ -13,7 +13,7 @@ router.get("/", planA.findAll);
 router.get("/upline/:uplineId", planA.findByUplineId);
 
 // Retrieve all planA by userId
-router.get("/user/:userId", planA.findByUserId);
+router.get("/:userId", planA.findByUserId);
 
 // Retrieve a single planA with id
 router.get("/:id", planA.findOne);

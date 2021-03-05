@@ -150,23 +150,25 @@ exports.signin = (req, res) => {
     });
 };
 
-// exports.GetAllAdmins = (req, res) => {
-//   User.findAll()
-//     .then(user => {
-//       if (!user) {
-//         return res.status(404).send({ message: "No User found." });
-//       }
-//       var authorities = [];
-//       user.forEach(item => {
-//         item.getRoles().then(roles => {
-//           for (let i = 0; i < roles.length; i++) {
-//             authorities.push("ROLE_" + roles[i].name.toUpperCase());
-//           }
-//         })
-//       });
-//       res.status(200).send(user);
-//     })
-//     .catch(err => {
-//       res.status(500).send({ message: err.message });
-//     });
-// };
+exports.GetAllAdmins = (req, res) => {
+  //  var condition = res.user.roles[0].user_roles.roleId ==2;
+
+  User.findAll({
+    
+   attributes: ['id', 'username', 'email'],
+    include: [{
+        model: Role,
+        where: {id: 3}
+    }],
+})
+  .then(user => {
+    if (!user) {
+      return res.status(404).send({ message: "No User found." });
+    }
+    
+    res.status(200).send(user);
+  })
+  .catch(err => {
+    res.status(500).send({ message: err.message });
+  });
+};
